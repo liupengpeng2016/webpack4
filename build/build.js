@@ -8,7 +8,6 @@ rm(path.resolve(__dirname, '../dist/'), function(err){
     if (err || stats.hasErrors()) {
       throw err
     }
-    console.log(stats.toString())
-    //process.stdout.write(stats.toString())
+    process.stdout.write(stats.toString())
   })
 })
