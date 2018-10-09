@@ -1,2 +1,7 @@
 import '../scss/invite.scss'
-console.log(Object.assign({name: 'zhangsan', age:12}))
+console.log('insdfsd'.includes('hehehe'))
+//console.log(Promise.resolve())
+//console.log(Object.assign({}, {name: 'zs'}))
+//const name = 'hehehe'
+// var test = new Promise(function(){});
+console.log('INNER' + process.env.NODE_ENV)

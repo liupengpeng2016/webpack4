@@ -4,7 +4,8 @@ module.exports = {
     entry: ['./src/js/invite.js'],
     html: ['./src/html/invite.html'],
     outputPath: path.resolve(__dirname, '../dist'),
-    assetsDir: 'static'
+    assetsDir: 'static',
+    inseryChunkByName: true
   },
   dev: {
     publicPath: './',
@@ -17,6 +18,7 @@ module.exports = {
       headers: {},
       https: false,
       open: false,
+      hot: true,
       openPage: '/invite.html',
       proxy: {}
     }

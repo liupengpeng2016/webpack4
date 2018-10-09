@@ -2,24 +2,31 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const conf = require('./config.js')
+const isProd = process.env.NODE_ENV === 'production'
 function createHtmInstance (htmlList) {
   return htmlList.map((val, i) => {
     const name = val.match(/[^/]\w*(?=\.html$)/)[0]
     return new HtmlWebpackPlugin({
       filename: name + '.html',
       template: val,
-      chunks: [name]
+      chunks: conf.base.inseryChunkByName ? [name] : undefined
     })
   })
 }
+function createEntry (entryList) {
+  const entry = {}
+  entryList.forEach((val, i) => {
+    const name = val.match(/[^/]\w*(?=\.js$)/)[0]
+    entry[name] = val
+  })
+  return entry
+}
 module.exports = {
   context: path.resolve(__dirname, '../'),
-  entry: {
-    invite: './src/js/invite.js'
-  },
+  entry: createEntry(conf.base.entry),
   output: {
     path: conf.base.outputPath,
-    filename: conf.base.assetsDir + '/js/[name].[chunkhash].js'
+    filename: conf.base.assetsDir + '/js/[name].' +  (isProd ? '[chunkhash].' : '') + 'js'
   },
   module: {
     rules: [
@@ -27,20 +34,25 @@ module.exports = {
         test: /\.s?css$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,
-            options: {}
+            loader: isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+            options: {
+              sourceMap: true
+            }
           },
-          'css-loader'
+          {
+            loader: 'css-loader',
+            options: {
+              minimize: true
+            }
+          }
         ]
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader'
-          }
-        ]
+        use: {
+          loader: 'babel-loader'
+        }
       },
       {
         test: /(png|jpe?g|gif)$/,
@@ -48,7 +60,7 @@ module.exports = {
           loader: 'url-loader',
           options: {
             limit: 8 * 1024,
-            name: 'static/images/[hash].[ext]',
+            name: 'static/images/' + (isProd ? '[hash]' : '[name]') + '.[ext]',
             publicPath: '../../'
           }
         }
@@ -57,8 +69,5 @@ module.exports = {
   },
   plugins: [
     ...createHtmInstance(conf.base.html || ['./src/index.html']),
-    new MiniCssExtractPlugin({
-      filename: conf.base.assetsDir + '/css/[name].[contenthash].css'
-    })
   ]
 }
