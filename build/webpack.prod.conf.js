@@ -3,15 +3,13 @@ const path = require('path')
 const conf = require('./config.js')
 const baseConf = require('./webpack.base.conf.js')
 const merge = require('webpack-merge')
+const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 module.exports = merge.smart(baseConf, {
-  mode: 'development',
-  //mode: 'production',
-  entry: {
-    chunkFilename: '[name].js'
-  },
+  mode: 'production',
   output: {
-    publicPath: conf.build.publicPath
+    publicPath: conf.build.publicPath,
+    chunkFilename: conf.base.assetsDir + '/js/[name].js'
   },
   module: {
     rules: [{
@@ -27,7 +25,15 @@ module.exports = merge.smart(baseConf, {
   plugins: [
     new MiniCssExtractPlugin({
       filename: conf.base.assetsDir + '/css/[name].[contenthash].css'
-    })
+    }),
+    //new webpack.optimize.CommonsChunkPlugin(),
+    new webpack.HashedModuleIdsPlugin()
   ],
-  devtool: conf.build.devtool
+  devtool: conf.build.devtool,
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+      //minSize: 0
+    }
+  }
 })

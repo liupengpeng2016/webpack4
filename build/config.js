@@ -1,7 +1,7 @@
 const path = require('path')
 module.exports = {
   base: {
-    entry: ['./src/js/invite.js'],
+    entry: ['./src/js/invite.js', './src/js/test.js'],
     html: ['./src/html/invite.html'],
     outputPath: path.resolve(__dirname, '../dist'),
     assetsDir: 'static',
