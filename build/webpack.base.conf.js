@@ -6,10 +6,17 @@ const isProd = process.env.NODE_ENV === 'production'
 function createHtmInstance (htmlList) {
   return htmlList.map((val, i) => {
     const name = val.match(/[^/]\w*(?=\.html$)/)[0]
+    // const chunks = [name,
+    //  'runtime~' + name,
+    //   name + '~runtime',
+    //   'vendors~' + name,
+    //   name + '~vendors'
+    // ]
+    const chunks = ['*']
     return new HtmlWebpackPlugin({
       filename: name + '.html',
       template: val,
-      chunks: conf.base.inseryChunkByName ? [name] : undefined
+      chunks: htmlList.length !== 1 ? chunks : undefined
     })
   })
 }
@@ -36,7 +43,8 @@ module.exports = {
           {
             loader: isProd ? MiniCssExtractPlugin.loader : 'style-loader',
             options: {
-              sourceMap: true
+              sourceMap: true,
+              publicPath: '../../'
             }
           },
           {
@@ -62,8 +70,7 @@ module.exports = {
           loader: 'url-loader',
           options: {
             limit: 8 * 1024,
-            name: 'static/images/' + (isProd ? '[hash]' : '[name]') + '.[ext]',
-            publicPath: '../../'
+            name: 'static/images/' + (isProd ? '[hash]' : '[name]') + '.[ext]'
           }
         }
       }

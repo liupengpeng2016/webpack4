@@ -1,3 +1,4 @@
+import './bbb.js'
 console.log('sdfjsdlkjflskjfdsklj');console.log('sdfjsdlkjflskjfdsklj');console.log('sdfjsdlkjflskjfdsklj');console.log('sdfjsdlkjflskjfdsklj');console.log('sdfjsdlkjflskjfdsklj');console.log('sdfjsdlkjflskjfdsklj');console.log('sdfjsdlkjflskjfdsklj');
 console.log('sdfjsdlkjflskjfdsklj');console.log('sdfjsdlkjflskjfdsklj');console.log('sdfjsdlkjflskjfdsklj');console.log('sdfjsdlkjflskjfdsklj');console.log('sdfjsdlkjflskjfdsklj');console.log('sdfjsdlkjflskjfdsklj');console.log('sdfjsdlkjflskjfdsklj');
 console.log('sdfjsdlkjflskjfdsklj');console.log('sdfjsdlkjflskjfdsklj');console.log('sdfjsdlkjflskjfdsklj');console.log('sdfjsdlkjflskjfdsklj');console.log('sdfjsdlkjflskjfdsklj');console.log('sdfjsdlkjflskjfdsklj');console.log('sdfjsdlkjflskjfdsklj');

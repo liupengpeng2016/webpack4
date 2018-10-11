@@ -1,6 +1,7 @@
 import '../scss/invite.scss'
-import a from './public'
-//import _ from 'lodash'
+
+import './public'
+import _ from 'lodash'
 //console.log('insdfsd'.includes('hehehe'))
 //console.log(Promise.resolve())
 //console.log(Object.assign({}, {name: 'zs'}))

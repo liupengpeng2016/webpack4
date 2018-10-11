@@ -5,11 +5,13 @@ const baseConf = require('./webpack.base.conf.js')
 const merge = require('webpack-merge')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const UglifyjsPlugin = require('uglifyjs-webpack-plugin')
 module.exports = merge.smart(baseConf, {
   mode: 'production',
   output: {
     publicPath: conf.build.publicPath,
-    chunkFilename: conf.base.assetsDir + '/js/[name].js'
+    chunkFilename: conf.base.assetsDir + '/js/[name].[chunkhash].js'
   },
   module: {
     rules: [{
@@ -26,14 +28,28 @@ module.exports = merge.smart(baseConf, {
     new MiniCssExtractPlugin({
       filename: conf.base.assetsDir + '/css/[name].[contenthash].css'
     }),
-    //new webpack.optimize.CommonsChunkPlugin(),
     new webpack.HashedModuleIdsPlugin()
   ],
   devtool: conf.build.devtool,
   optimization: {
     splitChunks: {
-      chunks: 'all'
-      //minSize: 0
-    }
+      chunks: 'all',
+      //minSize: 0,
+      //name: 'common'
+      cacheGroups: {
+        vendors: {
+          test: /[\/\\]node_modules[\/\\]/,
+          chunks: 'all',
+          name: true
+        },
+        // commons: {
+        //   test: /[\\\/]src[\\\/]js[\\\/]/,
+        //   name: true,
+        //   chunks: 'all'
+        // }
+      }
+    },
+    minimizer: [new OptimizeCssAssetsPlugin({}), new UglifyjsPlugin()],
+    runtimeChunk: true
   }
 })
