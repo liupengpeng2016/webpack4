@@ -33,23 +33,27 @@ module.exports = merge.smart(baseConf, {
   devtool: conf.build.devtool,
   optimization: {
     splitChunks: {
+      minSize: 30000,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
       chunks: 'all',
-      //minSize: 0,
-      //name: 'common'
       cacheGroups: {
         vendors: {
-          test: /[\/\\]node_modules[\/\\]/,
+          test: /[\\/]node_modules[\\/]/,
           chunks: 'all',
-          name: true
+          name: 'vendors',
+          minChunks: 1
         },
-        // commons: {
-        //   test: /[\\\/]src[\\\/]js[\\\/]/,
-        //   name: true,
-        //   chunks: 'all'
-        // }
+        commons: {
+          test: /[\\/]src[\\/]js[\\/]/,
+          name: 'commons',
+          chunks: 'all',
+          minChunks: 2,
+          reuseExistingChunk: true
+        }
       }
     },
     minimizer: [new OptimizeCssAssetsPlugin({}), new UglifyjsPlugin()],
-    runtimeChunk: true
+    runtimeChunk: conf.base.html.length > 1 ? false : true
   }
 })

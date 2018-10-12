@@ -6,13 +6,7 @@ const isProd = process.env.NODE_ENV === 'production'
 function createHtmInstance (htmlList) {
   return htmlList.map((val, i) => {
     const name = val.match(/[^/]\w*(?=\.html$)/)[0]
-    // const chunks = [name,
-    //  'runtime~' + name,
-    //   name + '~runtime',
-    //   'vendors~' + name,
-    //   name + '~vendors'
-    // ]
-    const chunks = ['*']
+    const chunks = [name, 'vandors', 'commons']
     return new HtmlWebpackPlugin({
       filename: name + '.html',
       template: val,
@@ -42,10 +36,10 @@ module.exports = {
         use: [
           {
             loader: isProd ? MiniCssExtractPlugin.loader : 'style-loader',
-            options: {
+            options: isProd ? {
               sourceMap: true,
               publicPath: '../../'
-            }
+            } : undefined
           },
           {
             loader: 'css-loader',
@@ -78,5 +72,10 @@ module.exports = {
   },
   plugins: [
     ...createHtmInstance(conf.base.html || ['./src/index.html']),
-  ]
+  ],
+  resolve: {
+    alias: {
+      assets: path.resolve(__dirname, '../src/assets/')
+    }
+  }
 }

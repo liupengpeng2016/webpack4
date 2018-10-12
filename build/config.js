@@ -1,11 +1,10 @@
 const path = require('path')
 module.exports = {
   base: {
-    entry: ['./src/js/invite.js'],
-    html: ['./src/html/invite.html'],
+    entry: ['./src/js/test.js'],
+    html: ['./src/html/test.html'],
     outputPath: path.resolve(__dirname, '../dist'),
     assetsDir: 'static'
-    //isSinglePage: true // affect htmlwebpackplugin chunks
   },
   dev: {
     publicPath: './',
@@ -13,13 +12,12 @@ module.exports = {
     devServer: {
       contentBase: false,
       publicPath: '/',
-      host: '0.0.0.0',
+      host: 'localhost',// '0.0.0.0',
       port: 3000,
       headers: {},
       https: false,
-      open: false,
+      open: 'chrome',
       hot: true,
-      openPage: '/invite.html',
       proxy: {}
     }
   },
