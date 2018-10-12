@@ -5,8 +5,8 @@ const conf = require('./config.js')
 const isProd = process.env.NODE_ENV === 'production'
 function createHtmInstance (htmlList) {
   return htmlList.map((val, i) => {
-    const name = val.match(/[^/]\w*(?=\.html$)/)[0]
-    const chunks = [name, 'vandors', 'commons']
+    const name = val.match(/[^/]*(?=\.html$)/)[0]
+    const chunks = [name, 'vendors', 'commons']
     return new HtmlWebpackPlugin({
       filename: name + '.html',
       template: val,
@@ -17,7 +17,7 @@ function createHtmInstance (htmlList) {
 function createEntry (entryList) {
   const entry = {}
   entryList.forEach((val, i) => {
-    const name = val.match(/[^/]\w*(?=\.js$)/)[0]
+    const name = val.match(/[^/]*(?=\.js$)/)[0]
     entry[name] = val
   })
   return entry
