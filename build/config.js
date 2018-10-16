@@ -4,7 +4,8 @@ module.exports = {
     entry: ['./src/js/test.js'],
     html: ['./src/html/test.html'],
     outputPath: path.resolve(__dirname, '../dist'),
-    assetsDir: 'static'
+    assetsDir: 'static',
+    isSinglePage: true // 是否为单页面应用，true时将忽略enter， html选项
   },
   dev: {
     publicPath: './',

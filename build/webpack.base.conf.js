@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const conf = require('./config.js')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const isProd = process.env.NODE_ENV === 'production'
 function createHtmInstance (htmlList) {
   return htmlList.map((val, i) => {
@@ -24,7 +25,7 @@ function createEntry (entryList) {
 }
 module.exports = {
   context: path.resolve(__dirname, '../'),
-  entry: createEntry(conf.base.entry),
+  entry: createEntry(conf.base.isSinglePage ? ['./src/index.js'] : conf.base.entry),
   output: {
     path: conf.base.outputPath,
     filename: conf.base.assetsDir + '/js/[name].' +  (isProd ? '[chunkhash].' : '') + 'js'
@@ -67,15 +68,22 @@ module.exports = {
             name: 'static/images/' + (isProd ? '[hash]' : '[name]') + '.[ext]'
           }
         }
+      },
+      {
+        test: /\.vue$/,
+        use: 'vue-loader'
       }
     ]
   },
   plugins: [
-    ...createHtmInstance(conf.base.html || ['./src/index.html']),
+    new VueLoaderPlugin(),
+    ...createHtmInstance(!conf.base.isSinglePage ? conf.base.html : ['./src/index.html']),
   ],
   resolve: {
     alias: {
-      assets: path.resolve(__dirname, '../src/assets/')
-    }
+      assets: path.resolve(__dirname, '../src/assets/'),
+      vue$: 'vue/dist/vue.esm.js'
+    },
+    extensions: ['.js', '.vue']
   }
 }
