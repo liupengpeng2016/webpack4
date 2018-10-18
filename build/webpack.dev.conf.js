@@ -4,8 +4,14 @@ const baseConf = require('./webpack.base.conf.js')
 const conf = require('./config.js')
 const merge = require('webpack-merge')
 const webpack = require('webpack')
+const chalk = require('chalk')
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const openHtml = conf.base.isSinglePage ? './index.html' : conf.base.html[0]
 conf.dev.devServer.openPage = openHtml.match(/\/[^\/]*$/)[0].replace(/^\//, '')
+const port = conf.dev.devServer.port
+console.log(
+  chalk.cyan('  The application is running at localhost:' + port + '/ + "path" or localIp:' + port + '/ + "path"\n')
+)
 module.exports = merge(baseConf, {
   mode: 'development',
   output: {
@@ -13,7 +19,8 @@ module.exports = merge(baseConf, {
   },
   plugins: [
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new FriendlyErrorsWebpackPlugin()
   ],
   devtool: conf.dev.devtool,
   devServer: conf.dev.devServer

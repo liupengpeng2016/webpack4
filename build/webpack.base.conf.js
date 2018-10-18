@@ -50,7 +50,10 @@ module.exports = {
           },
           'postcss-loader',
           'sass-loader'
-        ]
+        ].concat(conf.base.pxToRem.turnon ? {
+          loader: 'px2rem-loader',
+          options: conf.base.pxToRem
+          } : [])
       },
       {
         test: /\.js$/,
