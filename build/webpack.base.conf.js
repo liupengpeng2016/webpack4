@@ -49,11 +49,12 @@ module.exports = {
             }
           },
           'postcss-loader',
+          ...(conf.base.pxToRem.turnon ? [{
+            loader: 'px2rem-loader',
+            options: conf.base.pxToRem
+          }] : []),
           'sass-loader'
-        ].concat(conf.base.pxToRem.turnon ? {
-          loader: 'px2rem-loader',
-          options: conf.base.pxToRem
-          } : [])
+        ]
       },
       {
         test: /\.js$/,
@@ -84,8 +85,9 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      assets: path.resolve(__dirname, '../src/assets/'),
-      vue$: 'vue/dist/vue.esm.js'
+      assets: path.resolve(__dirname, '../src/assets'),
+      vue$: 'vue/dist/vue.esm.js',
+      '@': path.resolve(__dirname, '../src')
     },
     extensions: ['.js', '.vue']
   }
