@@ -1,6 +1,6 @@
 <template>
-  <div class="">
-    hehe
+  <div id='root'>
+    <router-view/>
   </div>
 </template>
 
@@ -10,8 +10,5 @@ export default {
 }
 </script>
 
-<style lang="scss">
-  body{
-    color:yellow;
-  }
+<style>
 </style>
