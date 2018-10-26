@@ -11,7 +11,8 @@ module.exports = {
       remUnit: 720, // 基准大小
       baseDpr:1,  // 输入尺寸的dpr
       remPrecision: 6 // 保留小数
-    }
+    },
+    useProxy: true
   },
   dev: {
     publicPath: './',
@@ -20,13 +21,27 @@ module.exports = {
       contentBase: false,
       quiet: true, // necessary for FriendlyErrorsPlugin
       publicPath: '/',
-      host: 'localhost',// '0.0.0.0',
-      port: 3000,
+      host: '0.0.0.0',// '0.0.0.0',
+      port: 8080,
       headers: {},
       https: false,
       open: false,//'chrome',
       hot: true,
-      proxy: {}
+      proxy: [
+        {
+          context: [
+            '/taoLiJin/goods',
+            '/TaoLiJin/history',
+            '/taoLiJin/item',
+            '/taoLiJin/detailImgList',
+            '/TaoLiJin/exchange',
+            '/taoLiJin/search',
+            '/TaoLiJin/userInfo'
+          ],
+          target: 'https://www.easy-mock.com/mock/5bcbe5f3e8326e1cdcb850f5/example',
+          secure: false
+        }
+      ]
     }
   },
   build: {

@@ -9,6 +9,9 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const openHtml = conf.base.isSinglePage ? './index.html' : conf.base.html[0]
 conf.dev.devServer.openPage = openHtml.match(/\/[^\/]*$/)[0].replace(/^\//, '')
 const port = conf.dev.devServer.port
+if (!conf.base.useProxy) {
+  delete conf.dev.devServer.proxy
+}
 console.log(
   chalk.cyan('  The application is running at localhost:' + port + '/ + "path" or localIp:' + port + '/ + "path"\n')
 )
