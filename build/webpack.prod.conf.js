@@ -1,4 +1,3 @@
-process.env.NODE_ENV = 'production'
 const path = require('path')
 const conf = require('./config.js')
 const baseConf = require('./webpack.base.conf.js')
@@ -7,6 +6,7 @@ const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyjsPlugin = require('uglifyjs-webpack-plugin')
+process.env.NODE_ENV = 'production'
 module.exports = merge.smart(baseConf, {
   mode: 'production',
   output: {
