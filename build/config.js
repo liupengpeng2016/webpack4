@@ -19,9 +19,9 @@ module.exports = {
     devtool: 'source-map',
     devServer: {
       contentBase: false,
-      quiet: true, // necessary for FriendlyErrorsPlugin
+      quiet: true,
       publicPath: '/',
-      host: '0.0.0.0',// '0.0.0.0',
+      host: 'localhost',// '0.0.0.0',
       port: 8080,
       headers: {},
       https: false,
@@ -29,16 +29,8 @@ module.exports = {
       hot: true,
       proxy: [
         {
-          context: [
-            '/taoLiJin/goods',
-            '/TaoLiJin/history',
-            '/taoLiJin/item',
-            '/taoLiJin/detailImgList',
-            '/TaoLiJin/exchange',
-            '/taoLiJin/search',
-            '/TaoLiJin/userInfo'
-          ],
-          target: 'https://www.easy-mock.com/mock/5bcbe5f3e8326e1cdcb850f5/example',
+          context: [],
+          target: '',
           secure: false
         }
       ]

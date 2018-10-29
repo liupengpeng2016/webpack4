@@ -74,6 +74,15 @@ module.exports = {
         }
       },
       {
+        test: /\.(html)$/,
+        use: {
+          loader: 'art-template-loader',
+          options: {
+            htmlResourceRules: [/\bsrc="([^"]*)"/]
+          }
+        }
+      },
+      {
         test: /\.vue$/,
         use: 'vue-loader'
       }
