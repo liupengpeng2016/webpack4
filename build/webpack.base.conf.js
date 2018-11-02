@@ -23,6 +23,19 @@ function createEntry (entryList) {
   })
   return entry
 }
+function createEslintRule () {
+  return {
+    test: /\.(js|vue)$/,
+    enforce: 'pre',
+    use: {
+      loader: 'eslint-loader',
+      options: {
+        //formatter: require('eslint-friendly-formatter'),
+        emitWarning: true
+      }
+    }
+  }
+}
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: createEntry(conf.base.isSinglePage ? ['./src/index.js'] : conf.base.entry),
@@ -32,8 +45,10 @@ module.exports = {
   },
   module: {
     rules: [
+      ...(conf.dev.useEslint ? [createEslintRule()] : []),
       {
         test: /\.s?css$/,
+        include: /src/,
         use: [
           {
             loader: isProd ? MiniCssExtractPlugin.loader : 'style-loader',
@@ -99,6 +114,6 @@ module.exports = {
       vue$: 'vue/dist/vue.esm.js',
       '@': path.resolve(__dirname, '../src')
     },
-    extensions: ['.js', '.vue']
+    extensions: ['.js', '.vue', 'json']
   }
 }

@@ -17,6 +17,7 @@ module.exports = {
   dev: {
     publicPath: './',
     devtool: 'source-map',
+    useEslint: true,
     devServer: {
       contentBase: false,
       quiet: true,

@@ -1,3 +1,4 @@
+/* eslint-disable */
 (function () {
   function setHtmlFont () {
     var clientW = document.documentElement.clientWidth
