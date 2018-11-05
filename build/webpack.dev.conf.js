@@ -1,3 +1,4 @@
+process.env.NODE_ENV = 'development'
 const path = require('path')
 const baseConf = require('./webpack.base.conf.js')
 const conf = require('./config.js')
@@ -7,7 +8,6 @@ const chalk = require('chalk')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const openHtml = conf.base.isSinglePage ? './index.html' : conf.base.html[0]
 const port = conf.dev.devServer.port
-process.env.NODE_ENV = 'development'
 conf.dev.devServer.openPage = openHtml.match(/\/[^\/]*$/)[0].replace(/^\//, '')
 if (!conf.dev.useProxy) {
   delete conf.dev.devServer.proxy

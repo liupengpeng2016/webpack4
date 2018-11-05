@@ -9,13 +9,12 @@ const {
   createEntry,
   createEslintRule
 } = require('./utils')
-
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: createEntry(getFileList('js')),
   output: {
     path: conf.base.outputPath,
-    filename: conf.base.assetsDir + '/js/[name].' +  (isProd ? '[chunkhash].' : '') + 'js'
+    filename: conf.base.assetsDir + '/js/[name].js'
   },
   module: {
     rules: [
