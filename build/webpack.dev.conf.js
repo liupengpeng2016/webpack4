@@ -9,7 +9,7 @@ const openHtml = conf.base.isSinglePage ? './index.html' : conf.base.html[0]
 const port = conf.dev.devServer.port
 process.env.NODE_ENV = 'development'
 conf.dev.devServer.openPage = openHtml.match(/\/[^\/]*$/)[0].replace(/^\//, '')
-if (!conf.base.useProxy) {
+if (!conf.dev.useProxy) {
   delete conf.dev.devServer.proxy
 }
 console.log(

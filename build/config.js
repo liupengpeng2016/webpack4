@@ -10,12 +10,12 @@ module.exports = {
       baseDpr:1,  // 输入尺寸的dpr
       remPrecision: 6 // 保留小数
     },
-    useProxy: true
+    useEslint: true,
   },
   dev: {
     publicPath: './',
     devtool: 'source-map',
-    useEslint: true,
+    useProxy: true,
     devServer: {
       contentBase: false,
       quiet: true,
