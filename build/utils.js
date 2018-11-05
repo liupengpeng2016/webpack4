@@ -1,12 +1,14 @@
 const fs = require('fs')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const conf = require('./config.js')
+const path = require('path')
 exports.createHtmInstance = function (htmlList) {
-  return htmlList.map((val, i) => {
+  return htmlList.map(val => {
     const chunks = [val, 'vendors', 'commons']
+    const basePath = conf.base.isSinglePage ? './src/' : './src/html/'
     return new HtmlWebpackPlugin({
       filename: val + '.html',
-      template: './src/html/' + val + '.html',
+      template: basePath + val + '.html',
       chunks: !conf.base.isSinglePage ? chunks : undefined
     })
   })
@@ -14,15 +16,21 @@ exports.createHtmInstance = function (htmlList) {
 
 exports.createEntry = function (entryList) {
   const entry = {}
-  entryList.forEach((val, i) => {
-    entry[val] = './src/js/' + val + '.js'
+  const basePath = conf.base.isSinglePage ? './src/' : './src/js/'
+  entryList.forEach(val => {
+    entry[val] =  basePath + val + '.js'
   })
   return entry
 }
 
-exports.getNameList = function (path) {
-  const fileList = fs.readdirSync(path)
-  return fileList.map(val => val.match(/[^.]*/).toString())
+exports.getFileList = function (type) {
+  let result;
+  if (!conf.base.isSinglePage) {
+    const fileList = fs.readdirSync(path.resolve(__dirname, '../src/' + type))
+    return fileList.map(val => val.match(/[^.]*/).toString())
+  } else {
+    return ['index']
+  }
 }
 
 exports.createEslintRule = function  () {

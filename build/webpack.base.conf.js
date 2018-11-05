@@ -4,21 +4,15 @@ const conf = require('./config.js')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const isProd = process.env.NODE_ENV === 'production'
 const {
-  getNameList,
+  getFileList,
   createHtmInstance,
   createEntry,
   createEslintRule
 } = require('./utils')
-const htmlList = !conf.base.isSinglePage
-  ? getNameList(path.resolve(__dirname, '../src/html'))
-  : ['./src/index.html']
-const jsList = conf.base.isSinglePage
-  ? ['./src/index.js']
-  : getNameList(path.resolve(__dirname, '../src/js'))
 
 module.exports = {
   context: path.resolve(__dirname, '../'),
-  entry: createEntry(jsList),
+  entry: createEntry(getFileList('js')),
   output: {
     path: conf.base.outputPath,
     filename: conf.base.assetsDir + '/js/[name].' +  (isProd ? '[chunkhash].' : '') + 'js'
@@ -85,7 +79,7 @@ module.exports = {
   },
   plugins: [
     new VueLoaderPlugin(),
-    ...createHtmInstance(htmlList),
+    ...createHtmInstance(getFileList('html')),
   ],
   resolve: {
     alias: {

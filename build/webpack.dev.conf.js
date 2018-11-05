@@ -13,7 +13,7 @@ if (!conf.base.useProxy) {
   delete conf.dev.devServer.proxy
 }
 console.log(
-  chalk.cyan('  The application is running at localhost:' + port + '/ + "path" or localIp:' + port + '/ + "path"\n')
+  chalk.cyan('The application is running at localhost:' + port + '/ + "path" or localIp:' + port + '/ + "path"\n')
 )
 module.exports = merge(baseConf, {
   mode: 'development',
