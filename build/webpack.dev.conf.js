@@ -6,9 +6,8 @@ const merge = require('webpack-merge')
 const webpack = require('webpack')
 const chalk = require('chalk')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
-const openHtml = conf.base.isSinglePage ? './index.html' : conf.base.html[0]
 const port = conf.dev.devServer.port
-conf.dev.devServer.openPage = openHtml.match(/\/[^\/]*$/)[0].replace(/^\//, '')
+conf.dev.devServer.openPage = conf.openPage || 'index.html'
 if (!conf.dev.useProxy) {
   delete conf.dev.devServer.proxy
 }

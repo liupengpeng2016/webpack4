@@ -24,7 +24,8 @@ module.exports = {
       port: 8080,
       headers: {},
       https: false,
-      open: false,//'chrome',
+      open: true,//'chrome',
+      openPage: 'index.html',
       hot: true,
       proxy: [
         {
