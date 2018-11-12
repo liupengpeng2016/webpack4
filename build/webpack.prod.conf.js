@@ -5,6 +5,7 @@ const baseConf = require('./webpack.base.conf.js')
 const merge = require('webpack-merge')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const WebpackEncodingPlugin = require('webpack-encoding-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyjsPlugin = require('uglifyjs-webpack-plugin')
 module.exports = merge.smart(baseConf, {
@@ -29,7 +30,14 @@ module.exports = merge.smart(baseConf, {
     new MiniCssExtractPlugin({
       filename: conf.base.assetsDir + '/css/[name].[contenthash].css'
     }),
-    new webpack.HashedModuleIdsPlugin()
+    new webpack.HashedModuleIdsPlugin(),
+    ...(conf.base.encode.toLowerCase() === 'utf-8'
+      ? []
+      : [new WebpackEncodingPlugin({
+        test: /\.(js|css|html)$/,
+        encoding: conf.base.encode || 'utf-8'
+      })]
+    )
   ],
   devtool: conf.build.devtool,
   optimization: {

@@ -11,6 +11,7 @@ module.exports = {
       remPrecision: 6 // 保留小数
     },
     useEslint: true,
+    encode: 'utf-8'
   },
   dev: {
     publicPath: './',
