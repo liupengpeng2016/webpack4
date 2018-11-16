@@ -48,13 +48,13 @@ module.exports = merge.smart(baseConf, {
       chunks: 'all',
       cacheGroups: {
         vendors: {
-          test: /[\\/]node_modules[\\/]/,
+          test: /node_module/,
           chunks: 'all',
           name: 'vendors',
           minChunks: 1
         },
         commons: {
-          test: /[\\/]src[\\/]js[\\/]/,
+          test: /src/,
           name: 'commons',
           chunks: 'all',
           minChunks: 2,

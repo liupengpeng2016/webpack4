@@ -3,7 +3,7 @@ module.exports = {
   base: {
     outputPath: path.resolve(__dirname, '../dist'),
     assetsDir: 'static',
-    isSinglePage: false, // 是否为单页面应用，单页面应用使用src目录下index.js作为主入口,index.html作为模板文件
+    isSinglePage: true, // 是否为单页面应用，单页面应用使用src目录下index.js作为主入口,index.html作为模板文件
     pxToRem: {
       turnon: true, // 是否转换px为rem
       remUnit: 720, // 基准大小
