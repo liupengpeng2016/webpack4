@@ -12,8 +12,8 @@ module.exports = merge.smart(baseConf, {
   mode: 'production',
   output: {
     publicPath: conf.build.publicPath,
-    filename: conf.base.assetsDir + '/js/[name].[chunkhash].' + 'js',
-    chunkFilename: conf.base.assetsDir + '/js/[name].[chunkhash].js'
+    filename: conf.base.assetsDir + '/js/[name].[contenthash].' + 'js',
+    chunkFilename: conf.base.assetsDir + '/js/[name].[contenthash].js'
   },
   module: {
     rules: [{

@@ -1,3 +1,3 @@
 /* eslint-disable */
-import VConsole from 'vconsole'
-new VConsole()
+// import VConsole from 'vconsole'
+// new VConsole()
