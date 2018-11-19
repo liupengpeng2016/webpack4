@@ -4,7 +4,7 @@ const conf = require('./config.js')
 const path = require('path')
 exports.createHtmInstance = function (htmlList) {
   return htmlList.map(val => {
-    const chunks = [val, 'vendors', 'commons']
+    const chunks = ['runtime~' + val, val, 'vendors', 'commons']
     const basePath = conf.base.isSinglePage ? './src/' : './src/html/'
     return new HtmlWebpackPlugin({
       filename: val + '.html',

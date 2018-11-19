@@ -63,6 +63,6 @@ module.exports = merge.smart(baseConf, {
       }
     },
     minimizer: [new OptimizeCssAssetsPlugin({}), new UglifyjsPlugin()],
-    runtimeChunk: conf.isSinglePage
+    runtimeChunk: true
   }
 })
